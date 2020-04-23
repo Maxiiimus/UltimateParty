@@ -1,6 +1,7 @@
 const rpio = require('rpio');
 const isPi = require('detect-rpi');
 const five = require("johnny-five");
+const Raspi = require("raspi-io").RaspIO;
 
 // Set up Raspberry Pi
 const SCL_PIN = 11;    // Clock
@@ -14,8 +15,11 @@ class LEDController {
         console.log("LED Clock: "+ SCL_PIN);
         console.log("LED Data: "+ IO_PIN);
         console.log("LED CS: "+ SDA_PIN);
+]
+        this.board = new five.Board({
+            io: new Raspi()
+        });
 
-        this.board = new five.Board();
         this.board.on("ready", function() {
             var digits = new five.Led.Digits({
                 pins: {
