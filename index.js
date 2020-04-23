@@ -5,6 +5,7 @@ const io = require('socket.io')(http);
 const path = require('path');
 const keyRegister = require('./components/KeyRegister');
 const SimpleServer = require('./components/SimpleServer');
+const LEDController = require('./components/LEDController');
 
 // Set up client browser
 const port = process.env.PORT || "80";
@@ -16,6 +17,7 @@ const REGISTER_SIZE = 8;
 
 // The register is all of the shift registers representing the keys
 let register = new keyRegister(REGISTER_SIZE, MODULE_COUNT);
-let simpleServer = new SimpleServer();
+let led = new LEDController();
+let simpleServer = new SimpleServer(led);
 
 simpleServer.start(http, io, port, register);

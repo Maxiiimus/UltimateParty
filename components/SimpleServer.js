@@ -1,8 +1,9 @@
 const fs = require('fs');
 
 class SimpleServer {
-    constructor() {
+    constructor(led) {
         this.option = false;
+        this.ledController = led;
     }
 
     start (http, io, port) {
